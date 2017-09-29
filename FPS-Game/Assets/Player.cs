@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour 
 {
+    public Weapon.WeaponType_int weapon = Weapon.WeaponType_int.noWeapon;
 
 	// Use this for initialization
 	private void Start()

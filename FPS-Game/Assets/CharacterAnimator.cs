@@ -29,7 +29,6 @@ public class CharacterAnimator : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-
         charcontroller = GetComponentInParent<CharacterController>();
 
         chanimator = this.GetComponent<Animator>();
@@ -48,11 +47,15 @@ public class CharacterAnimator : MonoBehaviour
         {
             chanimator.SetBool("Jump_b", true);
         }
-
-
         else if (charcontroller.velocity.y == 0)
         {
             chanimator.SetBool("Jump_b", false);
         }
     }
+
+    public void PlayerDie(DeathTypes_int deathType)
+    {
+
+    }
+
 }
