@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class moveToObject : MonoBehaviour {
-
+public class MoveToObject : MonoBehaviour
+{
     public Transform target;
 
 	// Use this for initialization
