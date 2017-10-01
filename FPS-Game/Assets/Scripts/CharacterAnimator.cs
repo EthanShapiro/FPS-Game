@@ -22,9 +22,9 @@ public class CharacterAnimator : MonoBehaviour
 
     private CharacterController charcontroller;
 
-    Vector3 horizontalvelocity;
+    private Vector3 horizontalvelocity;
 
-    Animator chanimator;
+    private Animator chanimator;
 
 	// Use this for initialization
 	void Start ()
@@ -54,6 +54,11 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     public void PlayerDie(DeathTypes_int deathType)
+    {
+
+    }
+
+    public void SetWeaponType(Weapon.WeaponType_int weaponType)
     {
 
     }

@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class Player : MonoBehaviour 
+public class WeaponSwapper : MonoBehaviour 
 {
-    public Weapon.WeaponType_int weapon = Weapon.WeaponType_int.noWeapon;
+    private Weapon[] weapons = new Weapon[15]; 
 
 	// Use this for initialization
 	private void Start()
 	{
-
+        weapons = GetComponentsInChildren<Weapon>();
 	}
+
 	// Update is called once per frame
 	private void Update()
 	{
