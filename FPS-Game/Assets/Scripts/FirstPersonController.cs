@@ -28,6 +28,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+        [SerializeField] private Transform cameraMoveTarget;
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -46,11 +47,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Use this for initialization
         private void Start()
         {
-            if (!isLocalPlayer)
+            if (isLocalPlayer == false)
             {
+                //print("Destroing this " + GetInstanceID().ToString());
                 Destroy(this);
+                return;
             }
 
+            InitCamera();
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = GetComponentInChildren<Camera>();
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
@@ -62,7 +66,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
         }
-
 
         // Update is called once per frame
         private void Update()
@@ -89,6 +92,27 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
         }
 
+        private void InitCamera()
+        {
+            // Add Add camera if is the local player
+            if (isLocalPlayer)
+            {
+                //print("Local player initializing");
+                GameObject cameraGO = GetComponentsInChildren<Transform>()[1].gameObject; // Get index 1 because getcomponents in children includes this if the component is present on this
+                cameraGO.AddComponent<Camera>();
+                cameraGO.AddComponent<AudioListener>();
+                cameraGO.AddComponent<FlareLayer>();
+                MoveToObject moveToObject = cameraGO.AddComponent<MoveToObject>();
+                moveToObject.target = cameraMoveTarget;
+                //print("Local player done initalizing");
+            }
+            else
+            {
+                // If the current player is not local, then delete where camera would go
+                Destroy(cameraMoveTarget.gameObject);
+                return;
+            }
+        }
 
         private void PlayLandingSound()
         {

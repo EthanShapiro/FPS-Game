@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class Player : MonoBehaviour 
+public class Player : NetworkBehaviour 
 {
     public Weapon weapon;
 
-	// Use this for initialization
-	private void Start()
+    // Use this for initialization
+    private void Start()
 	{
         weapon = GetComponentInChildren<Weapon>();
 	}

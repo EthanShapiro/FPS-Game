@@ -18,5 +18,4 @@ public class Weapon : MonoBehaviour
     {
         return gunBarrel;
     }
-
 }
