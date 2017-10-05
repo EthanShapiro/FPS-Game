@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-static class NoWeaponIdle_Floats
+static class WeaponIdle_Floats
 {
     public static float[] noWeaponAll = { 0f, 0f };
     public static float[] pistolIdle = { 0f, 0f };
@@ -22,8 +22,6 @@ public class CharacterAnimator : MonoBehaviour
 
     private CharacterController charcontroller;
 
-    private Vector3 horizontalvelocity;
-
     private Animator chanimator;
 
 	// Use this for initialization
@@ -35,11 +33,12 @@ public class CharacterAnimator : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	private void Update ()
     {
-        horizontalvelocity = new Vector3(charcontroller.velocity.x, 0, charcontroller.velocity.z);
+        Vector3 localHorizontalVelocity = transform.InverseTransformDirection(charcontroller.velocity);
+        localHorizontalVelocity = new Vector3(localHorizontalVelocity.x, 0, localHorizontalVelocity.z);
 
-        float horizontalspeed = horizontalvelocity.magnitude;
+        float horizontalspeed = localHorizontalVelocity.magnitude;
 
         chanimator.SetFloat("Speed_f", horizontalspeed);
 

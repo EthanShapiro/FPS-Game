@@ -9,6 +9,7 @@ public class MeleeWeapon : MonoBehaviour
 	{
 
 	}
+
 	// Update is called once per frame
 	private void Update()
 	{
