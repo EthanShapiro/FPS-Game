@@ -10,12 +10,12 @@ public class NetworkManagerUIController : NetworkManager
 
     public override void OnStartClient(NetworkClient client)
     {
-
+        ui.gameObject.SetActive(false);
     }
 
     public override void OnStopClient()
     {
-
+        ui.gameObject.SetActive(true);
     }
 
     public override void OnStartHost()

@@ -7,6 +7,7 @@ using UnityStandardAssets.CrossPlatformInput;
 public class Player : NetworkBehaviour 
 {
     public Weapon weapon;
+    public int health = 10;
 
     // Use this for initialization
     private void Start()
@@ -19,12 +20,22 @@ public class Player : NetworkBehaviour
         bool shoot = Input.GetMouseButtonUp(0);
         if (shoot)
         {
-            Ray shot = new Ray(weapon.GetBarrelTransform().position, weapon.GetBarrelTransform().forward);
-            RaycastHit[] hits = Physics.RaycastAll(shot, 20f);
-            for(int i = 0; i < hits.Length; i++)
-            {
-                print(hits[i].transform);
-            }
+            CmdRaycastShot();
         }
 	}
+
+    [Command]
+    private void CmdRaycastShot()
+    {
+        Ray shot = new Ray(weapon.GetBarrelTransform().position, weapon.GetBarrelTransform().forward);
+        RaycastHit[] hits = Physics.RaycastAll(shot, 20f);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            Player playerController = hits[i].transform.GetComponent<Player>();
+            if (playerController)
+            {
+                playerController.health--;
+            }
+        }
+    }
 }
